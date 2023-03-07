@@ -30,6 +30,11 @@ public class Player : MonoBehaviour
         resources.Add(ResourceType.Ore, 0);
     }
 
+    public virtual ResourceType giveUpResource(){
+        // User selects a resource
+        return null;
+    }
+
 
 
     // Start is called before the first frame update
