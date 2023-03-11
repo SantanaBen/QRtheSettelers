@@ -26,6 +26,24 @@ public class ComputerPlayerAgent : Player
         return card;
     }
 
+    // Uses RNG to move the robber to a random board tile
+    public override void moveRobber(GameBoard board)
+    {
+        // Removes robber from current tile
+        foreach(Tile t in board.getBoard()){
+            if(t.getRobberPresent){
+                t.toggleRobber();           
+            }
+        }
+
+        Random random = new Random();
+        List<Tile> tiles = board.getBoard();
+        int index = random.Next(tiles.Count);
+        // Moves the robber to a randomly chosen tile
+        Tile newRobberTile = tiles[index];
+        newRobberTile.toggleRobber();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

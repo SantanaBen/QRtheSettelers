@@ -24,6 +24,14 @@ public class GameBoard : MonoBehaviour
         
     }
 
+    void getAdjacentTiles(Tile tile){
+        // This is a method that will be used frequently in the game logic
+        // List<Tiles> tiles = board.getTiles();
+        // For each tile in tiles
+        // increment and decrement y, getTile each time
+        // Decrement and increment x, each time increment y once to getTile
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -6,13 +6,20 @@ public class Tile : MonoBehaviour
 {
     private int xCoord;
     private int yCoord;
+    private bool robberPresent;
     private ResourceType type;
+
     // private TerrainType terrain;
 
     public Tile(int xCoord, int yCoord, ResourceType type){
+        // if terrain = desert, robberPresent = true; else false;
         this.xCoord = xCoord;
         this.yCoord = yCoord;
         this.type = type;
+    }
+
+    public void toggleRobber(){
+        robberPresent = !robberPresent;
     }
 
     public int getXCoord(){
@@ -21,6 +28,10 @@ public class Tile : MonoBehaviour
 
     public int getYCoord(){
         return this.yCoord;
+    }
+
+    public bool getRobberPresent(){
+        return robberPresent;
     }
 
 

@@ -31,8 +31,15 @@ public class Player : MonoBehaviour
     }
 
     public virtual ResourceType giveUpResource(){
-        // User selects a resource
+        // User selects a resource to give
+        // resources[type] --;
         return null;
+    }
+
+    public virtual void moveRobber(GameBoard board){
+        // Player chooses a tile to move the robber to;
+        // Old: tile.toggleRobber()
+        // New: tile.toggleRobber()
     }
 
 
