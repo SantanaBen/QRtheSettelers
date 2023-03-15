@@ -10,9 +10,6 @@ public ResourceCard(ResourceType type){
         this.type = type;
 }
     
-
-    
-
     // Start is called before the first frame update
     void Start()
     {

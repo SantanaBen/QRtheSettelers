@@ -7,6 +7,21 @@ public class Controller : MonoBehaviour
 
     public List<DevelopmentCard> developmentCards = new List<DevelopmentCard>();
     public List<Player> players = new List<Player>();
+    public Player currentPlayer = null;
+    private LinkedList<Player> gameQueue;
+    private boolean isAbridged;
+
+    public Controller(boolean isAbridged){
+        // Collect information on number of players
+        // Create computer player agents for the rest
+        // Add them to player list
+
+        this.isAbridged = isAbridged;
+        gameQueue = new LinkedList<Player>(players);
+        // Making the game queue a circularly linked list for turn based functionality
+        gameQueue.Last.Next = gameQueue.First;
+        currentPlayer = gameQueue.First;
+    }
 
     // Class to handle game logic and turns
 
@@ -63,6 +78,28 @@ public class Controller : MonoBehaviour
                 // Player can move the robber to anywhere
                 rolled.moveRobber();
                 // Player who rolled can steal card from whoever has adjacent structure
+            }
+        }
+    }
+
+    public Player getNextPlayer(){
+        currentPlayer = currentPlayer.Next;
+        return currentPlayer;
+    }
+
+    public void turn(Player currentPlayer){
+        // Turns have three phases: roll, build, trade
+    }
+
+    public void gameLoop(){
+        // Check if game is over
+        if(isAbridged){
+            // Check timer
+        } else {
+            foreach(Player p in players){
+                if(p.victoryPoints <= 10){
+                  // Game has been won.
+                }
             }
         }
     }
