@@ -7,7 +7,7 @@ public class GameBoard : MonoBehaviour
     private Dictionary<(int,int), Tile> board = new Dictionary<(int, int), Tile>(19);
 
     public void addTile(Tile tile){
-        board[(tile.getXCoord, tile.getYCoord)] = tile;
+        board[(tile.getXCoord(), tile.getYCoord())] = tile;
     }
 
     public Tile getTile(int x, int y){
@@ -33,10 +33,10 @@ public class GameBoard : MonoBehaviour
     }
 
     // Returns all adjacent tiles to a given point
-    void getAdjacentTiles(Tile tile){
+    List<Tile> getAdjacentTiles(Tile tile){
         List<Tile> adjacentTiles = new List<Tile>();
-        int x = tile.getXCoord;
-        int y = tile.getYCoord;
+        int x = tile.getXCoord();
+        int y = tile.getYCoord();
 
         // Operations can be done on the x and y coordinates to get the six possible adjacent tiles.
         List<(int,int)> temp = new List<(int, int)>(6); // Holds all potential coordinates for adjacent tiles.

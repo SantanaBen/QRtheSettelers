@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour
     public virtual ResourceType giveUpResource(){
         // User selects a resource to give
         // resources[type] --;
-        return null;
+        return ResourceType.Ore;
     }
 
     public virtual void moveRobber(GameBoard board){

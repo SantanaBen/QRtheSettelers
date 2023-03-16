@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using System;
 
 public class ComputerPlayerAgent : Player
 {
@@ -19,7 +21,7 @@ public class ComputerPlayerAgent : Player
                 resourceList.Add(kvp.Key);
             }
         }
-        Random random = new Random();
+        System.Random random = new System.Random();
         int index = random.Next(resourceList.Count);
         ResourceType card = resourceList[index];
         resources[card] -= 1;
@@ -30,14 +32,14 @@ public class ComputerPlayerAgent : Player
     public override void moveRobber(GameBoard board)
     {
         // Removes robber from current tile
-        foreach(Tile t in board.getBoard()){
-            if(t.getRobberPresent){
+        foreach(Tile t in board.getBoard().Values){
+            if(t.getRobberPresent()){
                 t.toggleRobber();           
             }
         }
 
-        Random random = new Random();
-        List<Tile> tiles = board.getBoard();
+        System.Random random = new System.Random();
+        List<Tile> tiles = board.getBoard().Values.ToList();
         int index = random.Next(tiles.Count);
         // Moves the robber to a randomly chosen tile
         Tile newRobberTile = tiles[index];
