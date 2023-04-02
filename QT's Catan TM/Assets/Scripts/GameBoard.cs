@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameBoard : MonoBehaviour
 {
     public Dictionary<(int,int), Tile> board = new Dictionary<(int, int), Tile>(19);
-
+    public List<Intersection> intersections = new List<Intersection>();
     public void addTile(Tile tile){
         board[(tile.getXCoord(), tile.getYCoord())] = tile;
     }
