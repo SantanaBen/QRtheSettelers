@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    private int xCoord;
-    private int yCoord;
+    public int xCoord;
+    public int yCoord;
     private bool robberPresent;
     private ResourceType type;
+    public int num;
 
     // private TerrainType terrain;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameBoard : MonoBehaviour
 {
-    private Dictionary<(int,int), Tile> board = new Dictionary<(int, int), Tile>(19);
+    public Dictionary<(int,int), Tile> board = new Dictionary<(int, int), Tile>(19);
 
     public void addTile(Tile tile){
         board[(tile.getXCoord(), tile.getYCoord())] = tile;
