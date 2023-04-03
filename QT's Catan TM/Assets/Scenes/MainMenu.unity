@@ -1158,7 +1158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -31, y: -231}
+  m_AnchoredPosition: {x: -31, y: -223}
   m_SizeDelta: {x: -354.0878, y: -321.416}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1050336754
@@ -2497,6 +2497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1884801820}
   - component: {fileID: 1884801819}
+  - component: {fileID: 1884801821}
   m_Layer: 0
   m_Name: ClickAudio
   m_TagString: Untagged
@@ -2615,6 +2616,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1884801821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884801818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd66a17cbe7f2b40b00bf993d79a2aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2082601061
 GameObject:
   m_ObjectHideFlags: 0
