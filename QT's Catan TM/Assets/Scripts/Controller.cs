@@ -11,33 +11,37 @@ public class Controller : MonoBehaviour
     public LinkedListNode<Player> currentPlayer = null;
     private LinkedList<Player> gameQueue;
     public GameBoard board;
-    private bool isAbridged;
+    public int numHumanPlayers;
+    public string difficulty;
+    public int recentRoll;
 
-    public Controller(bool isAbridged){
+    public void setRecentRoll(int x){
+        recentRoll = x;
+    }
+
+    public void setUpPlayers(){
+        string[] colours = {"Red", "Blue", "White", "Orange"};
+        int numCpuPlayers = 4 - numHumanPlayers;
+        for(int i = 1; i <= numHumanPlayers; i++){
+            Player p = new Player(i.ToString(), false, colours[i-1]);
+            players.Add(p);
+        }
+        for(int i = 1; i <= numCpuPlayers; i++){
+            ComputerPlayerAgent p = new ComputerPlayerAgent(i.ToString(), true, colours[i+numHumanPlayers-1]);
+            players.Add(p);
+        }
+    }
+    public Controller(){
         // Collect information on number of players
         // Create computer player agents for the rest
         // Add them to player list
 
-        this.isAbridged = isAbridged;
-        gameQueue = new LinkedList<Player>(players);
+        // gameQueue = new LinkedList<Player>(players);
         // Making the game queue a circularly linked list for turn based functionality
-        gameQueue.AddLast(gameQueue.First);
+        // gameQueue.AddLast(gameQueue.First);
     }
 
     // Class to handle game logic and turns
-
-    public int rollDice(){
-        // Create a random number generator
-        System.Random random = new System.Random();
-        // Generate two numbers between 1 and 6 inclusive
-        int d1 = random.Next(1,7);
-        int d2 = random.Next(1,7);
-        return d1 + d2;
-    }
-
-    public void showDevelopmentCosts(){
-        // Display card showing development card costs.
-    }
 
     public DevelopmentCard buyDevelopmentCard(Player p){
         if(p.resources[ResourceType.Grain] < 1 ||
@@ -74,7 +78,7 @@ public class Controller : MonoBehaviour
                 decimal x = sum/2;
                 x = Math.Floor(x);
                 int numCardstoGive = (int)x;
-                Console.WriteLine("Player ", p.name, " must give ", numCardstoGive, " cards.");
+                // Console.WriteLine("Player ", p.name, " must give ", numCardstoGive, " cards.");
                 // Each player with more than seven resource cards removes half
                 // Player can move the robber to anywhere
                 rolled.moveRobber(board);
@@ -92,7 +96,7 @@ public class Controller : MonoBehaviour
         // Turns have three phases: roll, build, trade
     }
 
-    public void gameLoop(){
+    /* public void gameLoop(){
         // Check if game is over
         if(isAbridged){
             // Check timer
@@ -103,7 +107,7 @@ public class Controller : MonoBehaviour
                 }
             }
         }
-    }
+    } */
 
 
     // Start is called before the first frame update

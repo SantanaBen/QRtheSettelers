@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class ButtonMethods : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +18,17 @@ public class ButtonMethods : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void StartGame(){
+        GameObject gameControllerObject = new GameObject("GameController");
+        Controller gameController = gameControllerObject.AddComponent<Controller>();
+        Slider slider = GameObject.Find("PlayersSlider").GetComponent<Slider>();
+        gameController.numHumanPlayers = (int)slider.value;
+        TextMeshProUGUI textbox = GameObject.Find("DifficultyBox").GetComponent<TextMeshProUGUI>();
+        gameController.difficulty = textbox.text;
+        gameController.setUpPlayers();
+        DontDestroyOnLoad(gameControllerObject);
     }
 
    public void Back(){

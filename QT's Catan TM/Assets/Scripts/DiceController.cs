@@ -15,14 +15,18 @@ public class DiceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Controller gameController = GameObject.FindObjectOfType<Controller>();
+        Text textbox = GameObject.Find("SumBox").GetComponent<Text>();
+        gameController.recentRoll = int.Parse(textbox.text);
     }
 
-  public void TestButtonMethod()
+  public void Roll()
     {
 
           SumBox sumBox = GameObject.Find("SumBox").GetComponent<SumBox>();
           sumBox.ResetSum();
+
+         Controller gameController = GameObject.FindObjectOfType<Controller>();
          GameObject dice1 = GameObject.Find("Dice1"); // Find the object with the name "Dice1"
          Dice diceScript1 = dice1.GetComponent<Dice>();        
          diceScript1.OnMouseDown();
@@ -35,7 +39,7 @@ public class DiceController : MonoBehaviour
          int dice2Value = diceScript2.faceValue;
 
          int sum = dice1Value + dice2Value;
-         Debug.Log("Sum of dice values: " + sum);
+         gameController.recentRoll = sum;
 
     }
 }
