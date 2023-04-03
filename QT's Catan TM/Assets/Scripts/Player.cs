@@ -5,7 +5,7 @@ using System;
 
 public class Player : MonoBehaviour
 {
-    public string name;
+    public string playerName;
     public bool cpu;
     public string colour;
     public int victoryPoints;
@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
     public List<City> cities;
     public List<Road> roads;
 
-    public Player(string name, bool cpu, string colour){
-        this.name = name;
+    public Player(string playerName, bool cpu, string colour){
+        this.playerName = playerName;
         this.cpu = cpu;
         this.colour = colour;
         victoryPoints = 0;
