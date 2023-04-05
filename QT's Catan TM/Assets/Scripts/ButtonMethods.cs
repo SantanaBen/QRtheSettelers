@@ -31,6 +31,16 @@ public class ButtonMethods : MonoBehaviour
         DontDestroyOnLoad(gameControllerObject);
     }
 
+    public void EndTurn(){
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        controller.getNextPlayer();
+
+        TextMeshProUGUI textbox = GameObject.Find("CurrentPlayerBox").GetComponent<TextMeshProUGUI>();
+        // Debug.Log("Setting textbox text.");
+        textbox.text = "Player: " + controller.currentPlayer.colour;
+    }
+
    public void Back(){
 	 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }

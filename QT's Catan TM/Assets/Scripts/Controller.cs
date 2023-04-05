@@ -8,8 +8,8 @@ public class Controller : MonoBehaviour
 
     public List<DevelopmentCard> developmentCards = new List<DevelopmentCard>();
     public List<Player> players = new List<Player>();
-    public LinkedListNode<Player> currentPlayer = null;
-    private LinkedList<Player> gameQueue;
+    private PlayerQueue gameQueue = new PlayerQueue();
+    public Player currentPlayer;
     public GameBoard board;
     public int numHumanPlayers;
     public string difficulty;
@@ -30,15 +30,21 @@ public class Controller : MonoBehaviour
             ComputerPlayerAgent p = new ComputerPlayerAgent(i.ToString(), true, colours[i+numHumanPlayers-1]);
             players.Add(p);
         }
+
+        PlayerQueue.PlayerNode p1 = new PlayerQueue.PlayerNode(players[0]);
+        PlayerQueue.PlayerNode p2 = new PlayerQueue.PlayerNode(players[1]);
+        PlayerQueue.PlayerNode p3 = new PlayerQueue.PlayerNode(players[2]);
+        PlayerQueue.PlayerNode p4 = new PlayerQueue.PlayerNode(players[3]);
+        p1.setNext(p2);
+        p2.setNext(p3);
+        p3.setNext(p4);
+        p4.setNext(p1);
+
+        gameQueue.current = p1;
+        currentPlayer = players[0];
     }
     public Controller(){
-        // Collect information on number of players
-        // Create computer player agents for the rest
-        // Add them to player list
-
-        // gameQueue = new LinkedList<Player>(players);
-        // Making the game queue a circularly linked list for turn based functionality
-        // gameQueue.AddLast(gameQueue.First);
+      
     }
 
     // Class to handle game logic and turns
@@ -87,9 +93,9 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public Player getNextPlayer(){
-        currentPlayer = currentPlayer.Next;
-        return currentPlayer.Value;
+    public void getNextPlayer(){
+        gameQueue.nextPlayer();
+        currentPlayer = gameQueue.current.getData();
     }
 
     public void turn(Player currentPlayer){
