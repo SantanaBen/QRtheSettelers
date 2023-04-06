@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BuyScreen.unity
     guid: 304cfb9e7894e0c4fa0a4a607eb90c41
+  - enabled: 1
+    path: Assets/Scenes/Inventory.unity
+    guid: 2046c280638a7514bb99a50eebf29e04
   m_configObjects: {}

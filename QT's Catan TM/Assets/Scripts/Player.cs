@@ -14,6 +14,7 @@ public class Player
     public List<Settlement> settlements;
     public List<City> cities;
     public List<Road> roads;
+    public List<DevelopmentCard> developmentCards;
 
     public Player(string playerName, bool cpu, string colour){
         this.playerName = playerName;
@@ -23,6 +24,7 @@ public class Player
         settlements = new List<Settlement>();
         cities = new List<City>();
         roads = new List<Road>();
+        developmentCards = new List<DevelopmentCard>();
 
         resources.Add(ResourceType.Lumber, 0);
         resources.Add(ResourceType.Brick, 0);

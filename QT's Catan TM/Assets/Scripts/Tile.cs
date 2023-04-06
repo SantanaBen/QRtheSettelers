@@ -7,10 +7,8 @@ public class Tile : MonoBehaviour
     public int xCoord;
     public int yCoord;
     private bool robberPresent;
-    private ResourceType type;
+    public ResourceType type;
     public int num;
-
-    // private TerrainType terrain;
 
     public Tile(int xCoord, int yCoord, ResourceType type){
         // if terrain = desert, robberPresent = true; else false;
@@ -40,7 +38,8 @@ public class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        robberPresent = (num == -1);
+
     }
 
     // Update is called once per frame
