@@ -53,9 +53,6 @@ public class Dice : MonoBehaviour {
         // Assigning final side so you can use this value later in your game
         // for player movement for example
         finalSide = randomDiceSide + 1;
-
-        // Show final dice value in Console
-        Debug.Log(finalSide);
         faceValue = finalSide;
 
         SumBox sumBox = GameObject.Find("SumBox").GetComponent<SumBox>();

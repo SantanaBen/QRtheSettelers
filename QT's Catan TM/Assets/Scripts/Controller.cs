@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
@@ -18,6 +19,36 @@ public class Controller : MonoBehaviour
     public void setRecentRoll(int x){
         recentRoll = x;
     }
+
+    public void collectResources(int diceRoll){
+        GameObject box = GameObject.Find("dBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
+        dBox.UpdateText(currentPlayer.colour + " rolled " + recentRoll + "!");
+        recentRoll = 0;
+        if(diceRoll == 7){
+            dBox.UpdateText("Robber activated by " + currentPlayer.colour + "!");
+            activateRobber(currentPlayer);
+            return;
+        }
+        // Dictionary<(int,int), Tile> gameBoard = board.getBoard();
+        // Go through list of tiles
+        // Each one with a number matching diceRoll, give each player one of the tile's resource type
+    }
+
+    public void mainLoop(){
+        bool isWon = false;
+        while(!isWon){
+            foreach(Player p in players){
+                if(p.victoryPoints >= 10){
+                    isWon = true;
+                    winGame(p);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void winGame(Player p){}
 
     public void setUpPlayers(){
         string[] colours = {"Red", "Blue", "White", "Orange"};
@@ -75,22 +106,8 @@ public class Controller : MonoBehaviour
 
     public void activateRobber(Player rolled){
         // Called when a player rolls a 7
-        foreach(Player p in players){
-            int sum = 0;
-            foreach(KeyValuePair<ResourceType, int> kvp in p.resources){
-                sum += kvp.Value;
-            }
-            if(sum >= 7){
-                decimal x = sum/2;
-                x = Math.Floor(x);
-                int numCardstoGive = (int)x;
-                // Console.WriteLine("Player ", p.name, " must give ", numCardstoGive, " cards.");
-                // Each player with more than seven resource cards removes half
-                // Player can move the robber to anywhere
-                rolled.moveRobber(board);
-                // Player who rolled can steal card from whoever has adjacent structure
-            }
-        }
+        // Each player with more than seven resource cards must remove half of their choice
+        // Current player chooses a tile to move the robber to
     }
 
     public void getNextPlayer(){

@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 96794892}
   - component: {fileID: 96794891}
   m_Layer: 5
-  m_Name: Button
+  m_Name: RollDice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,6 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sum: 0
+  rollButton: {fileID: 96794891}
 --- !u!1 &636659448
 GameObject:
   m_ObjectHideFlags: 0

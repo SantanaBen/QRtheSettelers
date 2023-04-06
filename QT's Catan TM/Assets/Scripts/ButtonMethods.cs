@@ -34,11 +34,20 @@ public class ButtonMethods : MonoBehaviour
     public void EndTurn(){
         GameObject gameControllerObj = GameObject.Find("GameController");
         Controller controller = gameControllerObj.GetComponent<Controller>();
+        GameObject box = GameObject.Find("dBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
+        dBox.UpdateText(controller.currentPlayer.colour + " has ended their turn.");   
         controller.getNextPlayer();
-
         TextMeshProUGUI textbox = GameObject.Find("CurrentPlayerBox").GetComponent<TextMeshProUGUI>();
-        // Debug.Log("Setting textbox text.");
         textbox.text = "Player: " + controller.currentPlayer.colour;
+    }
+
+    public void updateText(){
+        string message = "This is a new message.";
+        GameObject gameControllerObj = GameObject.Find("dBox");
+        DialogBox dBox = gameControllerObj.GetComponent<DialogBox>();
+        dBox.UpdateText(message);
+
     }
 
    public void Back(){

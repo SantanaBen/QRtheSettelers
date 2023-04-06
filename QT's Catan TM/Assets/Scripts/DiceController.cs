@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DiceController : MonoBehaviour
 {
      public int sum;
+     public Button rollButton; 
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,10 @@ public class DiceController : MonoBehaviour
 
   public void Roll()
     {
-
-          SumBox sumBox = GameObject.Find("SumBox").GetComponent<SumBox>();
-          sumBox.ResetSum();
+          
+        rollButton.interactable = false;
+        SumBox sumBox = GameObject.Find("SumBox").GetComponent<SumBox>();
+        sumBox.ResetSum();
 
          Controller gameController = GameObject.FindObjectOfType<Controller>();
          GameObject dice1 = GameObject.Find("Dice1"); // Find the object with the name "Dice1"
