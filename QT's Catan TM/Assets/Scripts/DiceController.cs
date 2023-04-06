@@ -10,6 +10,8 @@ public class DiceController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+      GameObject board = GameObject.Find("GameBoard");
+      board.SetActive(false);
         
     }
 

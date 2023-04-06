@@ -30,7 +30,16 @@ public class Controller : MonoBehaviour
             activateRobber(currentPlayer);
             return;
         }
-        // Dictionary<(int,int), Tile> gameBoard = board.getBoard();
+
+        List<Tile> boardTiles = board.tiles;
+        foreach(Tile tile in boardTiles){
+            if(tile.num == diceRoll){
+                foreach(Player p in players){
+                    p.resources[tile.type]++;
+                    Debug.Log("Player given one: " + tile.type);
+                }
+            }
+        }
         // Go through list of tiles
         // Each one with a number matching diceRoll, give each player one of the tile's resource type
     }

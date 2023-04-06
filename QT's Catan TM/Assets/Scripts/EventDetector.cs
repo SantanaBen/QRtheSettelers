@@ -7,6 +7,9 @@ public class EventDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject boardObject =  GameObject.Find("GameBoard");
+        DontDestroyOnLoad(boardObject);
+
         checkForDiceRoll();
         GameObject controllerBox =  GameObject.Find("GameController");
         Controller controller =  controllerBox.GetComponent<Controller>();

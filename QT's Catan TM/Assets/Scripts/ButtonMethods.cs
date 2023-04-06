@@ -18,6 +18,7 @@ public class ButtonMethods : MonoBehaviour
     void Update()
     {
         
+        
     }
 
     public void StartGame(){
