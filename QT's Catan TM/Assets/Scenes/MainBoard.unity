@@ -172,6 +172,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &6053552
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -420,6 +421,7 @@ MonoBehaviour:
   t2: {fileID: 2087110272}
   t3: {fileID: 1453942297}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &68257810
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -548,6 +550,7 @@ MonoBehaviour:
   t2: {fileID: 215266645}
   t3: {fileID: 620918477}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &87303477
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -676,6 +679,7 @@ MonoBehaviour:
   t2: {fileID: 2087110272}
   t3: {fileID: 1633850772}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &106215319
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -804,6 +808,7 @@ MonoBehaviour:
   t2: {fileID: 1636552425}
   t3: {fileID: 731160778}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &131027643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -932,6 +937,7 @@ MonoBehaviour:
   t2: {fileID: 452352012}
   t3: {fileID: 734936382}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &137980150
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1126,8 +1132,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -374, y: -267}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: -385, y: -267}
+  m_SizeDelta: {x: 310, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &147205751
 MonoBehaviour:
@@ -1176,8 +1182,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1276,6 +1282,7 @@ MonoBehaviour:
   t2: {fileID: 943923876}
   t3: {fileID: 2125945565}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &163097619
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1538,6 +1545,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &178442372
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1640,6 +1648,7 @@ MonoBehaviour:
   t2: {fileID: 734936382}
   t3: {fileID: 1958459523}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &180463861
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1767,6 +1776,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &183354465
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1988,6 +1998,7 @@ MonoBehaviour:
   t2: {fileID: 1636552425}
   t3: {fileID: 2087110272}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &246413379
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2116,6 +2127,7 @@ MonoBehaviour:
   t2: {fileID: 620918477}
   t3: {fileID: 1958459523}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &257445425
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2243,6 +2255,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &258015212
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2344,6 +2357,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &259590384
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2446,6 +2460,7 @@ MonoBehaviour:
   t2: {fileID: 1453942297}
   t3: {fileID: 215266645}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &260848816
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2944,6 +2959,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &400865405
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3165,6 +3181,7 @@ MonoBehaviour:
   t2: {fileID: 2125945565}
   t3: {fileID: 1453942297}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &547889165
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3292,6 +3309,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &586829873
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3512,6 +3530,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &651720612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3880,6 +3899,7 @@ MonoBehaviour:
   t2: {fileID: 1633850772}
   t3: {fileID: 215266645}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &724586801
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4246,6 +4266,7 @@ MonoBehaviour:
   t2: {fileID: 215266645}
   t3: {fileID: 734936382}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &776295071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4359,8 +4380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -371.4, y: 247.6}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: -362, y: 247.6}
+  m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820378781
 MonoBehaviour:
@@ -4409,8 +4430,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4508,6 +4529,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &855420877
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4728,6 +4750,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &975699778
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5059,6 +5082,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1077004214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5279,6 +5303,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1101177908
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5500,6 +5525,7 @@ MonoBehaviour:
   t2: {fileID: 943923876}
   t3: {fileID: 2087110272}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1119559084
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5628,6 +5654,7 @@ MonoBehaviour:
   t2: {fileID: 1211488227}
   t3: {fileID: 620918477}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1121769624
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5756,6 +5783,7 @@ MonoBehaviour:
   t2: {fileID: 1453942297}
   t3: {fileID: 452352012}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1172143847
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5884,6 +5912,7 @@ MonoBehaviour:
   t2: {fileID: 1633850772}
   t3: {fileID: 1211488227}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1183429603
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6276,6 +6305,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1446045068
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6632,6 +6662,7 @@ MonoBehaviour:
   t2: {fileID: 731160778}
   t3: {fileID: 1633850772}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1494862915
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7821,6 +7852,7 @@ MonoBehaviour:
   t2: {fileID: 1588557985}
   t3: {fileID: 943923876}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1732219105
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8203,6 +8235,7 @@ MonoBehaviour:
   t2: {fileID: 1706186072}
   t3: {fileID: 1090301535}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1822415570
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8330,6 +8363,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1832346049
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8432,6 +8466,7 @@ MonoBehaviour:
   t2: {fileID: 1110283797}
   t3: {fileID: 1090301535}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1850786987
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8559,6 +8594,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1872938926
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8662,6 +8698,7 @@ MonoBehaviour:
   t2: {fileID: 1090301535}
   t3: {fileID: 943923876}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1877355977
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8815,6 +8852,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1917217386
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8916,6 +8954,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1920474448
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9017,6 +9056,7 @@ MonoBehaviour:
   t2: {fileID: 0}
   t3: {fileID: 0}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1941431640
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9238,6 +9278,7 @@ MonoBehaviour:
   t2: {fileID: 1090301535}
   t3: {fileID: 1636552425}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &1985202172
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9647,6 +9688,7 @@ MonoBehaviour:
   t2: {fileID: 1636552425}
   t3: {fileID: 1090301535}
   settlementPresent: 0
+  cityPresent: 0
 --- !u!212 &2071158995
 SpriteRenderer:
   m_ObjectHideFlags: 0

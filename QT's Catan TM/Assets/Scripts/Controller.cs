@@ -32,10 +32,14 @@ public class Controller : MonoBehaviour
     }
 
     public bool verifyCityLocation(Intersection i1, Player p){
+        GameObject box = GameObject.Find("dBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
         if(!i1.settlementPresent){
+            dBox.UpdateText("City cannot be built. There is no settlement here.");
             return false;
         }
         if(i1.settlement.owner != p){
+            dBox.UpdateText("City cannot be built. Settlement does not belong to player.");
             return false;
         }
         return true;
@@ -105,7 +109,6 @@ public class Controller : MonoBehaviour
         DialogBox dBox = box.GetComponent<DialogBox>();
 
         if(!verifyCityLocation(i1, player)){
-            dBox.UpdateText("Invalid settlement location.");
             cityBuildMode = false;
             return;
         }
@@ -168,15 +171,13 @@ public class Controller : MonoBehaviour
         // Each one with a number matching diceRoll, give each player one of the tile's resource type
     }
 
-    public void checkWinner(){
+    public bool checkWinner(){
         foreach(Player p in players){
             if(p.victoryPoints >= 10){
-                GameObject box = GameObject.Find("dBox");
-                DialogBox dBox = box.GetComponent<DialogBox>();
-                dBox.UpdateText(p.colour + " has won the game!.");
-                // Go to winning screen. Pass player as param
+                return true;
             }
         }
+        return false;
     }
 
     public void setUpPlayers(){
@@ -280,6 +281,11 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkWinner();
+        if(checkWinner()){
+            SceneManager.LoadScene("WinningScreen");
+            Destroy(GameBoard.instance.gameObject);
+            Destroy(gameObject);
+        }
+
     }
 }

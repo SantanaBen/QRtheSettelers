@@ -10,16 +10,14 @@ public class EventDetector : MonoBehaviour
     {
         GameObject boardObject =  GameObject.Find("GameBoard");
         DontDestroyOnLoad(boardObject);
-
-        checkForDiceRoll();
         GameObject controllerBox =  GameObject.Find("GameController");
         Controller controller =  controllerBox.GetComponent<Controller>();
         TextMeshProUGUI textbox = GameObject.Find("CurrentPlayerBox").GetComponent<TextMeshProUGUI>();
         textbox.text = "Player: " + controller.currentPlayer.colour;
+        checkForDiceRoll();
         checkForSettlement();
         checkForRoad();
         checkForCity();
-    
     }
 
     void checkForDiceRoll(){
@@ -42,8 +40,7 @@ public class EventDetector : MonoBehaviour
         GameObject controllerBox =  GameObject.Find("GameController");
         Controller controller =  controllerBox.GetComponent<Controller>();
         if(controller.getRoadTriggered()){
-            controller.triggerRoad();
-            controller.buildRoad(controller.currentPlayer);
+
         }
     }
 
@@ -53,11 +50,5 @@ public class EventDetector : MonoBehaviour
         if(controller.cityBuildMode){
             Debug.Log("City build mode detected.");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

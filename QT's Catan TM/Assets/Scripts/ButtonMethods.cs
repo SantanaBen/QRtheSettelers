@@ -42,15 +42,19 @@ public class ButtonMethods : MonoBehaviour
         dBox.UpdateText(controller.currentPlayer.colour + " has ended their turn.");   
         controller.getNextPlayer();
         TextMeshProUGUI textbox = GameObject.Find("CurrentPlayerBox").GetComponent<TextMeshProUGUI>();
-        textbox.text = "Player: " + controller.currentPlayer.colour;
+        string playerText;
+        if(controller.currentPlayer.cpu){
+            playerText = "Player: " + controller.currentPlayer.colour + " [CPU]";
+        } else {
+            playerText = "Player: " + controller.currentPlayer.colour;
+        }
+        textbox.text = playerText;
     }
 
-    public void updateText(){
-        string message = "This is a new message.";
+    public void updateText(string message){
         GameObject gameControllerObj = GameObject.Find("dBox");
         DialogBox dBox = gameControllerObj.GetComponent<DialogBox>();
         dBox.UpdateText(message);
-
     }
    public void Back(){
 	 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
@@ -61,6 +65,17 @@ public class ButtonMethods : MonoBehaviour
     
     public void GoTo(string sceneName){
          SceneManager.LoadScene(sceneName);
+    }
+
+    public void cheat(){
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        Player p = controller.currentPlayer;
+        p.resources[ResourceType.Brick]+=10;
+        p.resources[ResourceType.Lumber]+=10;
+        p.resources[ResourceType.Grain]+=10;
+        p.resources[ResourceType.Ore]+=10;
+        p.resources[ResourceType.Wool]+=10;
     }
 
     // Called when the buy settlement button is pressed
