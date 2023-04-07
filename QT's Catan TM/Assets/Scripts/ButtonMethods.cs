@@ -29,6 +29,8 @@ public class ButtonMethods : MonoBehaviour
         TextMeshProUGUI textbox = GameObject.Find("DifficultyBox").GetComponent<TextMeshProUGUI>();
         gameController.difficulty = textbox.text;
         gameController.setUpPlayers();
+        gameController.setUpCards();
+
         DontDestroyOnLoad(gameControllerObject);
     }
 
@@ -50,7 +52,6 @@ public class ButtonMethods : MonoBehaviour
         dBox.UpdateText(message);
 
     }
-
    public void Back(){
 	 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
@@ -61,4 +62,50 @@ public class ButtonMethods : MonoBehaviour
     public void GoTo(string sceneName){
          SceneManager.LoadScene(sceneName);
     }
+
+    // Called when the buy settlement button is pressed
+    public void buySettlementPressed(){
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        Player p = controller.currentPlayer;
+        if(
+        (p.resources[ResourceType.Lumber] < 1) ||
+        (p.resources[ResourceType.Brick] < 1)  ||
+        (p.resources[ResourceType.Grain] < 1)  ||
+        (p.resources[ResourceType.Wool] < 1)   ){
+            // Print to dialogue box, not console!
+            Debug.Log("Insufficient funds to build settlement.");
+            return;
+        } else {
+            controller.triggerSettlement();
+            GoTo("MainBoard");
+        }
+    }
+
+    public void buyRoadPressed(){
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        Player p = controller.currentPlayer;
+        if(
+            (p.resources[ResourceType.Brick] < 1) ||
+            (p.resources[ResourceType.Lumber] < 1)
+        ){
+            // Print to dialogue box not console.
+            Debug.Log("Insufficient funds to build road.");
+            return;
+        } else {
+            controller.triggerRoad();
+            GoTo("MainBoard");
+        }
+
+    }
+
+    public void buyCityPressed(){
+
+    }
+
+    public void buyDevelopmentCardPressed(){
+        
+    }
+
 }

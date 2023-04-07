@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class EventDetector : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,6 +16,9 @@ public class EventDetector : MonoBehaviour
         Controller controller =  controllerBox.GetComponent<Controller>();
         TextMeshProUGUI textbox = GameObject.Find("CurrentPlayerBox").GetComponent<TextMeshProUGUI>();
         textbox.text = "Player: " + controller.currentPlayer.colour;
+        checkForSettlement();
+        checkForRoad();
+        checkForCity();
     
     }
 
@@ -24,6 +28,27 @@ public class EventDetector : MonoBehaviour
         if(controller.recentRoll != 0){
             controller.collectResources(controller.recentRoll);
         }
+    }
+
+    void checkForSettlement(){
+        GameObject controllerBox =  GameObject.Find("GameController");
+        Controller controller =  controllerBox.GetComponent<Controller>();
+        if(controller.getSettlementTriggered()){
+            controller.triggerSettlement();
+            controller.buildSettlement(controller.currentPlayer);
+        }
+    }
+
+    void checkForRoad(){
+        GameObject controllerBox =  GameObject.Find("GameController");
+        Controller controller =  controllerBox.GetComponent<Controller>();
+        if(controller.getRoadTriggered()){
+            controller.triggerRoad();
+            controller.buildRoad(controller.currentPlayer);
+        }
+    }
+
+    void checkForCity(){
     }
 
     // Update is called once per frame
