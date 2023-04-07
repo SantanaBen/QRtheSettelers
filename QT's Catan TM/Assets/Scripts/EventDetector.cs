@@ -33,9 +33,8 @@ public class EventDetector : MonoBehaviour
     void checkForSettlement(){
         GameObject controllerBox =  GameObject.Find("GameController");
         Controller controller =  controllerBox.GetComponent<Controller>();
-        if(controller.getSettlementTriggered()){
-            controller.triggerSettlement();
-            controller.buildSettlement(controller.currentPlayer);
+        if(controller.settlementBuildMode){
+            Debug.Log("Settlement build mode detected.");
         }
     }
 
@@ -49,6 +48,11 @@ public class EventDetector : MonoBehaviour
     }
 
     void checkForCity(){
+        GameObject controllerBox =  GameObject.Find("GameController");
+        Controller controller =  controllerBox.GetComponent<Controller>();
+        if(controller.cityBuildMode){
+            Debug.Log("City build mode detected.");
+        }
     }
 
     // Update is called once per frame

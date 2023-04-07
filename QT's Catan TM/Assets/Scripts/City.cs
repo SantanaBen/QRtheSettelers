@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class City : MonoBehaviour
+public class City
 {
 
-    public Tile location;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Intersection location;
+    public Player owner;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public City(Intersection location, Player owner){
+        this.location = location;
+        this.owner = owner;
     }
 }

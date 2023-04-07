@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
@@ -14,30 +15,74 @@ public class Controller : MonoBehaviour
     private bool cityTriggered = false;
     private bool roadTriggered = false;
     public Player currentPlayer;
-    public GameBoard board;
     public int numHumanPlayers;
     public string difficulty;
     public int recentRoll;
+    public bool settlementBuildMode = false;
+    public bool cityBuildMode = false;
 
     public void setRecentRoll(int x){
         recentRoll = x;
     }
-    public bool getSettlementTriggered(){
-        return settlementTriggered;
+
+    public bool verifySettlementLocation(Intersection i1){
+        Debug.Log("Verifying settlement location.");
+        Debug.Log("Settlement present: " + i1.settlementPresent);
+        return(!i1.settlementPresent);
     }
-    public bool getRoadTriggered(){
-        return roadTriggered;
+
+    public bool verifyCityLocation(Intersection i1, Player p){
+        if(!i1.settlementPresent){
+            return false;
+        }
+        if(i1.settlement.owner != p){
+            return false;
+        }
+        return true;
     }
-    public void triggerSettlement(){
-        settlementTriggered = !settlementTriggered;
-    }
-    public void triggerRoad(){
-        roadTriggered = !roadTriggered;
+
+    public bool verifyRoadLocation(Intersection i1, Intersection i2){
+        List<Tile> l1 = new List<Tile>();
+        l1.Add(i1.t1);
+        l1.Add(i1.t2);
+        l1.Add(i1.t3);
+
+        List<Tile> l2 = new List<Tile>();
+        l2.Add(i2.t1);
+        l2.Add(i2.t2);
+        l2.Add(i2.t3);
+
+        int count = 0;
+        // Count incremented when intersections share common tile
+
+        foreach(Tile t1 in l1){
+            foreach(Tile t2 in l2){
+                if(t1 == t2){
+                    count++;
+                }
+            }
+        }
+
+        // Road can only be built between two intersections if they share two tiles.
+        return(count == 2);
     }
     
-    public void buildSettlement(Player player){
+    public void buildSettlement(Player player, Intersection i1){
         GameObject box = GameObject.Find("dBox");
         DialogBox dBox = box.GetComponent<DialogBox>();
+
+        if(!verifySettlementLocation(i1)){
+            dBox.UpdateText("Invalid settlement location.");
+            settlementBuildMode = false;
+            return;
+        }
+
+        Dictionary<string, Color> colourMap = new Dictionary<string, Color>{
+        {"red", Color.red},
+        {"blue", Color.blue},
+        {"white", Color.white},
+        {"orange", new Color(1f, 0.5f, 0f)}};
+
         dBox.UpdateText(player.colour + " has chosen to build a settlement! +1 VP");
         player.victoryPoints++;
 
@@ -45,11 +90,42 @@ public class Controller : MonoBehaviour
         player.resources[ResourceType.Lumber]--;
         player.resources[ResourceType.Wool]--;
         player.resources[ResourceType.Grain]--;
-        
-        // Instantiate settlement on place of user input, add to p.settlements
+
+        Settlement s1 = new Settlement(i1, player);
+        player.settlements.Add(s1);
+        i1.settlement = s1;
+        SpriteRenderer renderer = i1.gameObject.GetComponent<SpriteRenderer>();
+        renderer.color = colourMap[player.colour.ToLower()];
+        i1.settlementPresent = true;
+        settlementBuildMode = false;
+    }
+
+    public void buildCity(Player player, Intersection i1){
+        GameObject box = GameObject.Find("dBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
+
+        if(!verifyCityLocation(i1, player)){
+            dBox.UpdateText("Invalid settlement location.");
+            cityBuildMode = false;
+            return;
+        }
+
+        dBox.UpdateText(player.colour + " has chosen to build a city! +2 VP");
+        player.victoryPoints += 2;
+
+        player.resources[ResourceType.Ore] -=3;
+        player.resources[ResourceType.Grain] -=2;
+
+        Transform transform = i1.gameObject.transform;
+        transform.localScale = new Vector3(transform.localScale.x * 1.5f, transform.localScale.y * 1.5f, transform.localScale.z);
+        City city = new City(i1, player);
+        i1.cityPresent = true;
+        player.cities.Add(city);
+        cityBuildMode = false;
     }
 
     public void buildRoad(Player player){
+        //buildMode = true;
         GameObject box = GameObject.Find("dBox");
         DialogBox dBox = box.GetComponent<DialogBox>();
         dBox.UpdateText(player.colour + " has chosen to build a road!");
@@ -72,13 +148,19 @@ public class Controller : MonoBehaviour
             activateRobber(currentPlayer);
             return;
         }
+        // For testing only, remove after.
+        players[0].resources[ResourceType.Brick]++;
+        players[0].resources[ResourceType.Lumber]++;
+        players[0].resources[ResourceType.Wool]++;
+        players[0].resources[ResourceType.Grain]++;
 
-        List<Tile> boardTiles = board.tiles;
+
+        List<Tile> boardTiles = GameBoard.instance.tiles;
         foreach(Tile tile in boardTiles){
             if(tile.num == diceRoll){
                 foreach(Player p in players){
                     p.resources[tile.type]++;
-                    Debug.Log("Player given one: " + tile.type);
+                    Debug.Log(p.colour + " given one: " + tile.type);
                 }
             }
         }
@@ -136,11 +218,24 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public Controller(){
-      
+    public bool getSettlementTriggered(){
+        return settlementTriggered;
     }
-
-    // Class to handle game logic and turns
+    public bool getCityTriggered(){
+        return cityTriggered;
+    }
+    public bool getRoadTriggered(){
+        return roadTriggered;
+    }
+    public void triggerSettlement(){
+        settlementBuildMode = !settlementBuildMode;
+    }
+    public void triggerRoad(){
+        roadTriggered = !roadTriggered;
+    }
+    public void triggerCity(){
+        cityBuildMode = !cityBuildMode;
+    }
 
     public DevelopmentCard buyDevelopmentCard(Player p){
         if(p.resources[ResourceType.Grain] < 1 ||

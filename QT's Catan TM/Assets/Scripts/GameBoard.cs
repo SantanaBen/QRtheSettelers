@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class GameBoard : MonoBehaviour
 {
+    public static GameBoard instance;
     public Dictionary<(int,int), Tile> board = new Dictionary<(int, int), Tile>(19);
     public List<Tile> tiles = new List<Tile>();
     public List<Intersection> intersections = new List<Intersection>();
+
     public void addTile(Tile tile){
         board[(tile.getXCoord(), tile.getYCoord())] = tile;
     }
@@ -31,8 +32,18 @@ public class GameBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    
         
     }
+    void Awake()
+{
+    if (instance == null) {
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    } else {
+        Destroy(gameObject);
+    }
+}
 
     // Returns all adjacent tiles to a given point
     List<Tile> getAdjacentTiles(Tile tile){
@@ -61,6 +72,6 @@ public class GameBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        
     }
 }

@@ -101,7 +101,20 @@ public class ButtonMethods : MonoBehaviour
     }
 
     public void buyCityPressed(){
-
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        Player p = controller.currentPlayer;
+        if(
+            (p.resources[ResourceType.Ore] < 3) ||
+            (p.resources[ResourceType.Grain] < 2)
+        ){
+            // Print to dialogue box not console.
+            Debug.Log("Insufficient funds to build city.");
+            return;
+        } else {
+            controller.triggerCity();
+            GoTo("MainBoard");
+        }
     }
 
     public void buyDevelopmentCardPressed(){

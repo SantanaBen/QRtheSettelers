@@ -1772,7 +1772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.9987488}
+  m_AnchoredPosition: {x: 0, y: -0.9987488}
   m_SizeDelta: {x: 0.000061035, y: -1.9975}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1186451985
@@ -2499,7 +2499,7 @@ GameObject:
   - component: {fileID: 1884801819}
   - component: {fileID: 1884801821}
   m_Layer: 0
-  m_Name: ClickAudio
+  m_Name: Click
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

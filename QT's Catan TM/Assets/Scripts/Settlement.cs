@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Settlement : MonoBehaviour
+public class Settlement
 {
+    public Intersection location;
+    public Player owner;
 
-    public Tile location;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Settlement(Intersection location, Player owner){
+        this.location = location;
+        this.owner = owner;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
