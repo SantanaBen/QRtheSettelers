@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinningScreen.unity
     guid: 33b882c9ccce6fc4ab7303b07c585eec
+  - enabled: 1
+    path: Assets/Scenes/Trade.unity
+    guid: 1599ba7738b41f745af3225d9ca401a0
   m_configObjects: {}
