@@ -80,6 +80,8 @@ public class ButtonMethods : MonoBehaviour
 
     // Called when the buy settlement button is pressed
     public void buySettlementPressed(){
+        GameObject box = GameObject.Find("DialogueBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
         GameObject gameControllerObj = GameObject.Find("GameController");
         Controller controller = gameControllerObj.GetComponent<Controller>();
         Player p = controller.currentPlayer;
@@ -87,9 +89,9 @@ public class ButtonMethods : MonoBehaviour
         (p.resources[ResourceType.Lumber] < 1) ||
         (p.resources[ResourceType.Brick] < 1)  ||
         (p.resources[ResourceType.Grain] < 1)  ||
-        (p.resources[ResourceType.Wool] < 1)   ){
-            // Print to dialogue box, not console!
-            Debug.Log("Insufficient funds to build settlement.");
+        (p.resources[ResourceType.Wool] < 1)   
+        ){
+            dBox.UpdateText("Insufficient resources to build settlement.");
             return;
         } else {
             controller.triggerSettlement();
@@ -98,6 +100,8 @@ public class ButtonMethods : MonoBehaviour
     }
 
     public void buyRoadPressed(){
+        GameObject box = GameObject.Find("DialogueBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
         GameObject gameControllerObj = GameObject.Find("GameController");
         Controller controller = gameControllerObj.GetComponent<Controller>();
         Player p = controller.currentPlayer;
@@ -105,8 +109,7 @@ public class ButtonMethods : MonoBehaviour
             (p.resources[ResourceType.Brick] < 1) ||
             (p.resources[ResourceType.Lumber] < 1)
         ){
-            // Print to dialogue box not console.
-            Debug.Log("Insufficient funds to build road.");
+            dBox.UpdateText("Insufficient resources to build road.");
             return;
         } else {
             controller.triggerRoad();
@@ -116,6 +119,8 @@ public class ButtonMethods : MonoBehaviour
     }
 
     public void buyCityPressed(){
+        GameObject box = GameObject.Find("DialogueBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
         GameObject gameControllerObj = GameObject.Find("GameController");
         Controller controller = gameControllerObj.GetComponent<Controller>();
         Player p = controller.currentPlayer;
@@ -124,7 +129,7 @@ public class ButtonMethods : MonoBehaviour
             (p.resources[ResourceType.Grain] < 2)
         ){
             // Print to dialogue box not console.
-            Debug.Log("Insufficient funds to build city.");
+            dBox.UpdateText("Insufficient resources to build city.");
             return;
         } else {
             controller.triggerCity();
@@ -133,7 +138,25 @@ public class ButtonMethods : MonoBehaviour
     }
 
     public void buyDevelopmentCardPressed(){
-        
+        GameObject box = GameObject.Find("DialogueBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        Player p = controller.currentPlayer;
+        if(
+            (p.resources[ResourceType.Ore] < 1) ||
+            (p.resources[ResourceType.Grain] < 1) ||
+            (p.resources[ResourceType.Wool] < 1)
+        ){
+            // Print to dialogue box not console.
+            dBox.UpdateText("Insufficient resources to buy development card.");
+            return;
+        } else if(controller.developmentCards.Count <= 0){
+            dBox.UpdateText("There are no development cards left.");
+        } else {
+            DevelopmentCard card = controller.buyDevelopmentCard(p);
+            dBox.UpdateText("Development card " + card + " purchased!");
+        }
     }
 
 }

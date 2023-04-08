@@ -1495,8 +1495,9 @@ GameObject:
   - component: {fileID: 1318461964}
   - component: {fileID: 1318461966}
   - component: {fileID: 1318461965}
+  - component: {fileID: 1318461967}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DialogueBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1621,6 +1622,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318461963}
   m_CullTransparentMesh: 1
+--- !u!114 &1318461967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318461963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea0ce478d75f5e4ebe332f8d3407d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textBox: {fileID: 1318461965}
+  fadeTime: 1
 --- !u!1 &1472864627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1720,8 +1735,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1472864629}
         m_TargetAssemblyTypeName: ButtonMethods, Assembly-CSharp
-        m_MethodName: GoTo
-        m_Mode: 5
+        m_MethodName: buyDevelopmentCardPressed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

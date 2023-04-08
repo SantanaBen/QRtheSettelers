@@ -20,6 +20,8 @@ public class Controller : MonoBehaviour
     public int recentRoll;
     public bool settlementBuildMode = false;
     public bool cityBuildMode = false;
+    public bool roadBuildingMode = false;
+    public static Player winner = null;
 
     public void setRecentRoll(int x){
         recentRoll = x;
@@ -127,16 +129,19 @@ public class Controller : MonoBehaviour
         cityBuildMode = false;
     }
 
-    public void buildRoad(Player player){
-        //buildMode = true;
+    public void buildRoad(Player player, Intersection i1, Intersection i2){
         GameObject box = GameObject.Find("dBox");
         DialogBox dBox = box.GetComponent<DialogBox>();
+
+        if(!verifyRoadLocation(i1,i2)){
+            dBox.UpdateText("Invalid road locations. Pick two adjacent intersections");
+            roadBuildingMode = false;
+            return;
+        }
         dBox.UpdateText(player.colour + " has chosen to build a road!");
 
         player.resources[ResourceType.Lumber]--;
         player.resources[ResourceType.Brick]--;
-        // Collect user input, two intersections
-        // Check if valid for road
         // Instantiate road
         // Add road to player.roads
     }
@@ -232,28 +237,19 @@ public class Controller : MonoBehaviour
         settlementBuildMode = !settlementBuildMode;
     }
     public void triggerRoad(){
-        roadTriggered = !roadTriggered;
+        roadBuildingMode = !roadBuildingMode;
     }
     public void triggerCity(){
         cityBuildMode = !cityBuildMode;
     }
 
     public DevelopmentCard buyDevelopmentCard(Player p){
-        if(p.resources[ResourceType.Grain] < 1 ||
-        p.resources[ResourceType.Ore] < 1 ||
-        p.resources[ResourceType.Wool] < 1){
-        //("Insufficient resources to buy a development card.");
-        }
-
-        if(developmentCards.Count == 0){
-            
-        }
-
-        System.Random random = new System.Random();
-        int index = random.Next(0, developmentCards.Count);
+        
+        int index = UnityEngine.Random.Range(0, developmentCards.Count);
         DevelopmentCard card = developmentCards[index];
+
         developmentCards.RemoveAt(index);
-        developmentCards.Add(card);
+        p.developmentCards.Add(card);
 
         p.resources[ResourceType.Grain] -= 1;
         p.resources[ResourceType.Ore] -= 1;
@@ -283,6 +279,7 @@ public class Controller : MonoBehaviour
     {
         if(checkWinner()){
             SceneManager.LoadScene("WinningScreen");
+            winner = currentPlayer;
             Destroy(GameBoard.instance.gameObject);
             Destroy(gameObject);
         }
