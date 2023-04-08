@@ -139,11 +139,19 @@ public class Controller : MonoBehaviour
             return;
         }
         dBox.UpdateText(player.colour + " has chosen to build a road!");
+        GameObject rb = GameObject.Find("RoadBuilder");
+        RoadBuilder roadBuild = rb.GetComponent<RoadBuilder>();
+        roadBuild.drawRoad(i1, i2, player);
 
         player.resources[ResourceType.Lumber]--;
         player.resources[ResourceType.Brick]--;
-        // Instantiate road
-        // Add road to player.roads
+        Road road = new Road(i1, i2, player); 
+        player.roads.Add(road);
+        i1.roadPresent = true;
+        i2.roadPresent = true;
+        i1.roads.Add(road);
+        i2.roads.Add(road);
+        roadBuildingMode = false;
     }
 
     public void collectResources(int diceRoll){

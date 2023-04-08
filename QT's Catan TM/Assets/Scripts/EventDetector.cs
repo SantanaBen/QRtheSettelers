@@ -29,25 +29,33 @@ public class EventDetector : MonoBehaviour
     }
 
     void checkForSettlement(){
+        GameObject box = GameObject.Find("dBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
         GameObject controllerBox =  GameObject.Find("GameController");
         Controller controller =  controllerBox.GetComponent<Controller>();
         if(controller.settlementBuildMode){
+            dBox.UpdateText("Please select an intersection to build a settlement.");
             Debug.Log("Settlement build mode detected.");
         }
     }
 
     void checkForRoad(){
+        GameObject box = GameObject.Find("dBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
         GameObject controllerBox =  GameObject.Find("GameController");
         Controller controller =  controllerBox.GetComponent<Controller>();
-        if(controller.getRoadTriggered()){
-
+        if(controller.roadBuildingMode){
+            dBox.UpdateText("Please select two intersections to build a road.");
         }
     }
 
     void checkForCity(){
+        GameObject box = GameObject.Find("dBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
         GameObject controllerBox =  GameObject.Find("GameController");
         Controller controller =  controllerBox.GetComponent<Controller>();
         if(controller.cityBuildMode){
+            dBox.UpdateText("Please select a settlement to build city on.");
             Debug.Log("City build mode detected.");
         }
     }
