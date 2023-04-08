@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 public class EventDetector : MonoBehaviour
@@ -24,6 +25,7 @@ public class EventDetector : MonoBehaviour
         GameObject controllerBox =  GameObject.Find("GameController");
         Controller controller =  controllerBox.GetComponent<Controller>();
         if(controller.recentRoll != 0){
+            GameObject.Find("RollButton").GetComponent<Button>().interactable = false;
             controller.collectResources(controller.recentRoll);
         }
     }

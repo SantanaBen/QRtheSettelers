@@ -17,6 +17,15 @@ public class Tile : MonoBehaviour
         this.type = type;
     }
 
+    public void OnMouseDown(){
+        Controller controller = GameObject.Find("GameController").GetComponent<Controller>();
+        if(controller.robberMode){
+            controller.robberMode = false;
+            controller.activateRobber(controller.currentPlayer, this);
+        }
+        Debug.Log("Tile clicked.");
+    }
+
     public void toggleRobber(){
         robberPresent = !robberPresent;
     }

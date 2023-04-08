@@ -23,6 +23,7 @@ public class Controller : MonoBehaviour
     public bool cityBuildMode = false;
     public bool roadBuildingMode = false;
     public static Player winner = null;
+    public bool robberMode = false;
 
     public void setRecentRoll(int x){
         recentRoll = x;
@@ -49,6 +50,9 @@ public class Controller : MonoBehaviour
     }
 
     public bool verifyRoadLocation(Intersection i1, Intersection i2){
+        if(i1.roadPresent && i2.roadPresent){
+            return false;
+        }
         List<Tile> l1 = new List<Tile>();
         l1.Add(i1.t1);
         l1.Add(i1.t2);
@@ -161,28 +165,44 @@ public class Controller : MonoBehaviour
         dBox.UpdateText(currentPlayer.colour + " rolled " + diceRoll + "!");
         recentRoll = 0;
         if(diceRoll == 7){
-            dBox.UpdateText("Robber activated by " + currentPlayer.colour + "!");
-            activateRobber(currentPlayer);
+            robberMode = true;
+            dBox.UpdateText("Select a tile to move the robber to: ");
+            if(currentPlayer.cpu){
+                Invoke("aiMoveRobber", 1.0f);
+            }
             return;
         }
-        // For testing only, remove after.
-        players[0].resources[ResourceType.Brick]++;
-        players[0].resources[ResourceType.Lumber]++;
-        players[0].resources[ResourceType.Wool]++;
-        players[0].resources[ResourceType.Grain]++;
-
-
+     
         List<Tile> boardTiles = GameBoard.instance.tiles;
+        List<Intersection> boardIntersections = GameBoard.instance.intersections;
         foreach(Tile tile in boardTiles){
             if(tile.num == diceRoll){
-                foreach(Player p in players){
-                    p.resources[tile.type]++;
-                    Debug.Log(p.colour + " given one: " + tile.type);
+                if(!tile.getRobberPresent()){
+                    foreach(Intersection i in boardIntersections){
+                        if(i.t1 == tile || i.t2 == tile || i.t3 == tile){
+                            if(i.settlementPresent){
+                                dBox.UpdateText(diceRoll + " rolled. " + i.settlement.owner.colour + " given 1 " + tile.type);
+                                i.settlement.owner.resources[tile.type]++;
+                            }
+                        }
+                    }
                 }
             }
         }
-        // Go through list of tiles
-        // Each one with a number matching diceRoll, give each player one of the tile's resource type
+    }
+
+    public void aiMoveRobber(){
+        List<Tile> tileList = GameBoard.instance.tiles;
+        Tile chosenTile = null;
+
+        while(chosenTile == null){
+            int randomIndex = UnityEngine.Random.Range(0, tileList.Count);
+            Tile randomTile = tileList[randomIndex];
+            if(!randomTile.getRobberPresent()){
+                chosenTile = randomTile;
+            }
+        }
+        activateRobber(currentPlayer, chosenTile);
     }
 
     public bool checkWinner(){
@@ -267,10 +287,16 @@ public class Controller : MonoBehaviour
         return card;
     }
 
-    public void activateRobber(Player rolled){
-        // Called when a player rolls a 7
-        // Each player with more than seven resource cards must remove half of their choice
-        // Current player chooses a tile to move the robber to
+    public void activateRobber(Player rolled, Tile tile){
+        GameBoard.instance.currentRobberTile.toggleRobber();
+        tile.toggleRobber();
+        GameBoard.instance.currentRobberTile = tile;
+
+        GameObject robberPawn = GameObject.Find("RobberPawn");
+        Vector3 robberPosition = robberPawn.transform.position;
+        robberPawn.transform.position = tile.transform.position;
+
+        // If players have more than 7 resources, take a random half
     }
 
     public void getNextPlayer(){
@@ -280,7 +306,7 @@ public class Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+    
     }
 
     // Update is called once per frame
@@ -302,13 +328,12 @@ public class Controller : MonoBehaviour
             GameObject.Find("Inventory").GetComponent<Button>().interactable = false;
             GameObject.Find("EndTurn").GetComponent<Button>().interactable = false;
         } else {
-            GameObject.Find("RollButton").GetComponent<Button>().interactable = true;
             GameObject.Find("BuildingCostsButton").GetComponent<Button>().interactable = true;
             GameObject.Find("BuyButton").GetComponent<Button>().interactable = true;
             GameObject.Find("TradeButton").GetComponent<Button>().interactable = true;
             GameObject.Find("Inventory").GetComponent<Button>().interactable = true;
             GameObject.Find("EndTurn").GetComponent<Button>().interactable = true;
-        }}
-
+            }   
+        }
     }
 }

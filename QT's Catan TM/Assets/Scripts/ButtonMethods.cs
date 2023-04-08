@@ -46,6 +46,7 @@ public class ButtonMethods : MonoBehaviour
         if(controller.currentPlayer.cpu){
             playerText = "Player: " + controller.currentPlayer.colour + " [CPU]";
         } else {
+            GameObject.Find("RollButton").GetComponent<Button>().interactable = true;
             playerText = "Player: " + controller.currentPlayer.colour;
         }
         textbox.text = playerText;
@@ -64,9 +65,7 @@ public class ButtonMethods : MonoBehaviour
         controller.collectResources(roll);
         ComputerPlayerAgent ai = (ComputerPlayerAgent)controller.currentPlayer;
         
-        //if can build road & a settlement, make a random choice between the two 
-
-  
+        // If can build road & a settlement, make a random choice between the two 
         if((ai.canBuildSettlement()) && (ai.canBuildRoad())){
             int choice = Random.Range(1,3);
             if(choice == 1){
