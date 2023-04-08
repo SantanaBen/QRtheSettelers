@@ -4,6 +4,7 @@ using System.Threading;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -157,7 +158,7 @@ public class Controller : MonoBehaviour
     public void collectResources(int diceRoll){
         GameObject box = GameObject.Find("dBox");
         DialogBox dBox = box.GetComponent<DialogBox>();
-        dBox.UpdateText(currentPlayer.colour + " rolled " + recentRoll + "!");
+        dBox.UpdateText(currentPlayer.colour + " rolled " + diceRoll + "!");
         recentRoll = 0;
         if(diceRoll == 7){
             dBox.UpdateText("Robber activated by " + currentPlayer.colour + "!");
@@ -291,6 +292,23 @@ public class Controller : MonoBehaviour
             Destroy(GameBoard.instance.gameObject);
             Destroy(gameObject);
         }
+        if(SceneManager.GetActiveScene().name == "MainBoard"){
+        if((currentPlayer.cpu)){
+            //Disable buttons if CPU turn
+            GameObject.Find("RollButton").GetComponent<Button>().interactable = false;
+            GameObject.Find("BuildingCostsButton").GetComponent<Button>().interactable = false;
+            GameObject.Find("BuyButton").GetComponent<Button>().interactable = false;
+            GameObject.Find("TradeButton").GetComponent<Button>().interactable = false;
+            GameObject.Find("Inventory").GetComponent<Button>().interactable = false;
+            GameObject.Find("EndTurn").GetComponent<Button>().interactable = false;
+        } else {
+            GameObject.Find("RollButton").GetComponent<Button>().interactable = true;
+            GameObject.Find("BuildingCostsButton").GetComponent<Button>().interactable = true;
+            GameObject.Find("BuyButton").GetComponent<Button>().interactable = true;
+            GameObject.Find("TradeButton").GetComponent<Button>().interactable = true;
+            GameObject.Find("Inventory").GetComponent<Button>().interactable = true;
+            GameObject.Find("EndTurn").GetComponent<Button>().interactable = true;
+        }}
 
     }
 }

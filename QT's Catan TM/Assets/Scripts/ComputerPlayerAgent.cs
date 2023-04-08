@@ -46,15 +46,16 @@ public class ComputerPlayerAgent : Player
         newRobberTile.toggleRobber();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public bool canBuildSettlement(){
+        return(resources[ResourceType.Brick] > 0 &&
+               resources[ResourceType.Lumber] > 0 &&
+               resources[ResourceType.Grain] > 0 &&
+               resources[ResourceType.Wool] > 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public bool canBuildRoad(){
+        return(resources[ResourceType.Brick] > 0 &&
+               resources[ResourceType.Lumber] > 0
+        );
     }
 }

@@ -49,7 +49,73 @@ public class ButtonMethods : MonoBehaviour
             playerText = "Player: " + controller.currentPlayer.colour;
         }
         textbox.text = playerText;
+
+        if(controller.currentPlayer.cpu){
+            Invoke("aiTurn", 2.0f);
+        }
     }
+
+    void aiTurn(){
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        GameObject box = GameObject.Find("dBox");
+        DialogBox dBox = box.GetComponent<DialogBox>();
+        int roll = Random.Range(1, 13);
+        controller.collectResources(roll);
+        ComputerPlayerAgent ai = (ComputerPlayerAgent)controller.currentPlayer;
+        
+        //if can build road & a settlement, make a random choice between the two 
+
+  
+        if((ai.canBuildSettlement()) && (ai.canBuildRoad())){
+            int choice = Random.Range(1,3);
+            if(choice == 1){
+                settlementPath();
+                return;
+            } else {
+                roadPath();
+                return;
+            }   
+        } else {
+            Invoke("EndTurn", 2.0f);
+        }
+    }
+
+    void roadPath(){
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        List<Intersection> intersections = GameBoard.instance.intersections;
+        bool validIntersectionPairFound = false;
+        Intersection i1 = null;
+        Intersection i2 = null;
+        while (!validIntersectionPairFound)
+        {
+            i1 = GameBoard.instance.intersections[Random.Range(0, GameBoard.instance.intersections.Count)];
+            i2 = GameBoard.instance.intersections[Random.Range(0, GameBoard.instance.intersections.Count)];
+
+            if (controller.verifyRoadLocation(i1, i2))
+            {
+                validIntersectionPairFound = true;
+            }
+        }
+        controller.buildRoad(controller.currentPlayer, i1, i2);
+        Invoke("EndTurn", 3.0f);
+    }
+
+    void settlementPath(){
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        List<Intersection> intersections = GameBoard.instance.intersections;
+            Intersection randomIntersection = null;
+            do {
+                int randomIndex = Random.Range(0, intersections.Count);
+                randomIntersection = intersections[randomIndex];
+            } while (randomIntersection.settlementPresent);
+            controller.buildSettlement(controller.currentPlayer, randomIntersection);
+            Invoke("EndTurn", 3.0f);
+        }
+        
+
 
     public void updateText(string message){
         GameObject gameControllerObj = GameObject.Find("dBox");
