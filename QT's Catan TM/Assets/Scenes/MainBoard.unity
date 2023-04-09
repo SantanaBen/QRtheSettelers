@@ -812,7 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b222bc5b674d0c429509bf417677ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  t1: {fileID: 1110283797}
+  t1: {fileID: 1798194111}
   t2: {fileID: 1636552425}
   t3: {fileID: 731160778}
   settlementPresent: 0
@@ -10005,8 +10005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t1: {fileID: 1110283797}
-  t2: {fileID: 1636552425}
-  t3: {fileID: 1090301535}
+  t2: {fileID: 1798194111}
+  t3: {fileID: 1636552425}
   settlementPresent: 0
   cityPresent: 0
   roadPresent: 0

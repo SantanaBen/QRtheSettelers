@@ -11,6 +11,11 @@ public class TradeManager : MonoBehaviour
     Player p1;
     Player p2;
     Player p3;
+    Player traderA;
+    Player traderB;
+
+    public List<Slider> currentSliders;
+    public List<Slider> otherSliders;
     void Start()
     {
         GameObject gameControllerObj = GameObject.Find("GameController");
@@ -26,6 +31,7 @@ public class TradeManager : MonoBehaviour
         p2 = traders[1];
         p3 = traders[2];
 
+        traderA = p;
         loadCurrent(p);
     }
 
@@ -61,8 +67,6 @@ public class TradeManager : MonoBehaviour
         slider.maxValue = (float)player.resources[ResourceType.Lumber];
         slider = GameObject.Find("CurrentBrickSlider").GetComponent<Slider>();
         slider.maxValue = (float)player.resources[ResourceType.Brick];
-
-
     }
 
     public void loadOther(Player other){
@@ -95,26 +99,97 @@ public class TradeManager : MonoBehaviour
     }
 
     public void p1Pressed(){
+        traderB = p1;
         loadOther(p1);
     }
     public void p2Pressed(){
+        traderB = p2;
         loadOther(p2);
     }
     public void p3Pressed(){
+        traderB = p3;
         loadOther(p3);
     }
 
+    public void rejectTrade(){
+        for(int i = 0; i < 5; i++){
+            currentSliders[i].value = 0;
+            otherSliders[i].value = 0;
+        }
+        GameObject.Find("Player1").GetComponent<Button>().interactable = true;
+        GameObject.Find("Player2").GetComponent<Button>().interactable = true;
+        GameObject.Find("Player3").GetComponent<Button>().interactable = true;
+        GameObject.Find("AcceptTrade").GetComponent<Button>().interactable = false;
+        GameObject.Find("RejectTrade").GetComponent<Button>().interactable = false;
+
+        GameObject.Find("TradeDialogue").GetComponent<TextMeshProUGUI>().text = "Trade rejected.";
+    }
+
+    public void acceptTrade(){
+        GameObject.Find("TradeDialogue").GetComponent<TextMeshProUGUI>().text = "Trade accepted";
+        List<ResourceType> tradeMaterials = new List<ResourceType>(){ResourceType.Ore, ResourceType.Lumber, ResourceType.Brick, ResourceType.Wool, ResourceType.Grain}; 
+        for(int i = 0; i < 5; i++){
+                traderA.resources[tradeMaterials[i]] -= (int)currentSliders[i].value;
+                traderB.resources[tradeMaterials[i]] += (int)currentSliders[i].value;
+
+                traderA.resources[tradeMaterials[i]] += (int)otherSliders[i].value;
+                traderB.resources[tradeMaterials[i]] -= (int)otherSliders[i].value;
+        }
+
+        loadCurrent(traderA);
+        loadOther(traderB);
+    }
+
+
     public void proposeTrade(){
-        if(checkTrade()){
-            // Set buttons as interactable
+        int[] a = new int[5];
+        int[] b = new int[5];
+
+        for(int i = 0; i < 5; i++){
+            a[i] = (int)currentSliders[i].value;
+            b[i] = (int)otherSliders[i].value;
+        }
+
+        if(checkTrade(a, b)){
+            GameObject.Find("TradeDialogue").GetComponent<TextMeshProUGUI>().text = "Trade proposed. Accept or Reject?";
+            GameObject.Find("AcceptTrade").GetComponent<Button>().interactable = true;
+            GameObject.Find("RejectTrade").GetComponent<Button>().interactable = true;
+            GameObject.Find("Player1").GetComponent<Button>().interactable = false;
+            GameObject.Find("Player2").GetComponent<Button>().interactable = false;
+            GameObject.Find("Player3").GetComponent<Button>().interactable = false;
+
+            if(traderB.cpu){
+                GameObject.Find("AcceptTrade").GetComponent<Button>().interactable = false;
+                GameObject.Find("RejectTrade").GetComponent<Button>().interactable = false;
+                int choice = UnityEngine.Random.Range(1,3);
+                if(choice == 1){
+                    Invoke("acceptTrade", 2.0f);
+                } else {
+                    Invoke("rejectTrade", 2.0f);
+                }
+            }
+
         } else {
-            // Set sliders to 0
-            // Dialogue box, invalid trade.
+            for(int i = 0; i < 5; i++){
+                currentSliders[i].value = 0;
+                otherSliders[i].value = 0;
+            }
+            GameObject.Find("TradeDialogue").GetComponent<TextMeshProUGUI>().text = "Invalid trade.";
         }
     }
 
-    public bool checkTrade(){
-        return true;
+    public bool checkTrade(int[] a, int[] b){
+        bool currentNull = true;
+        bool otherNull = true;
+        for(int i = 0; i < 5; i++){
+            if(a[i] != 0){
+                currentNull = false;
+            }
+            if(b[i] != 0){
+                otherNull = false;
+            }
+        }
+        return !(currentNull || otherNull);
     }
 
     // Update is called once per frame

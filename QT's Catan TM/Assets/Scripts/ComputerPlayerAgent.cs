@@ -53,6 +53,20 @@ public class ComputerPlayerAgent : Player
                resources[ResourceType.Wool] > 0);
     }
 
+    public bool canBuildCity(){
+        // If there is a valid settlement that isn't already a city
+        bool validSettlementPresent = false;
+        foreach(Settlement s in settlements){
+            if(!s.location.cityPresent){
+                validSettlementPresent = true;
+                break;
+            }
+        }
+        return(resources[ResourceType.Grain] > 1 &&
+               resources[ResourceType.Ore] > 2
+               && validSettlementPresent);
+    }
+
     public bool canBuildRoad(){
         return(resources[ResourceType.Brick] > 0 &&
                resources[ResourceType.Lumber] > 0

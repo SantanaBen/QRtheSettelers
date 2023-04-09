@@ -65,17 +65,36 @@ public class ButtonMethods : MonoBehaviour
         controller.collectResources(roll);
         ComputerPlayerAgent ai = (ComputerPlayerAgent)controller.currentPlayer;
         
-        // If can build road & a settlement, make a random choice between the two 
-        if((ai.canBuildSettlement()) && (ai.canBuildRoad())){
-            int choice = Random.Range(1,3);
-            if(choice == 1){
-                settlementPath();
-                return;
+        int choiceMade = 0;
+        // 1 is build settlement, 2 is build city, 3 is build road, 4 is nothing
+        while(choiceMade == 0){
+            int localChoice = UnityEngine.Random.Range(1,5);
+            if(localChoice == 4){
+                choiceMade = 4;
+            } else if(localChoice == 1){
+                if(ai.canBuildSettlement()){
+                    choiceMade = 1;
+                }
+            } else if(localChoice == 2){
+                if(ai.settlements.Count > 0 && ai.canBuildCity()){
+                    choiceMade = 2;
+                }
             } else {
-                roadPath();
-                return;
-            }   
-        } else {
+                if(ai.canBuildRoad()){
+                    choiceMade = 3;
+                }
+            }
+        }
+
+        if(choiceMade == 1){
+            settlementPath();
+            return;
+        } else if(choiceMade == 2){
+            cityPath();
+            return;
+        } else if(choiceMade == 3){
+            roadPath();
+        } else{
             Invoke("EndTurn", 2.0f);
         }
     }
@@ -110,9 +129,24 @@ public class ButtonMethods : MonoBehaviour
                 int randomIndex = Random.Range(0, intersections.Count);
                 randomIntersection = intersections[randomIndex];
             } while (randomIntersection.settlementPresent);
-            controller.buildSettlement(controller.currentPlayer, randomIntersection);
-            Invoke("EndTurn", 3.0f);
+        controller.buildSettlement(controller.currentPlayer, randomIntersection);
+        Invoke("EndTurn", 3.0f);
         }
+    
+    void cityPath(){
+        GameObject gameControllerObj = GameObject.Find("GameController");
+        Controller controller = gameControllerObj.GetComponent<Controller>();
+        Intersection i1 = null;
+        while(i1 == null){
+            foreach(Settlement s in controller.currentPlayer.settlements){
+                if(!s.location.cityPresent){
+                    i1 = s.location;
+                }
+            }
+        }
+        controller.buildCity(controller.currentPlayer, i1);
+        Invoke("EndTurn", 3.0f);
+    }
         
 
 
@@ -135,7 +169,13 @@ public class ButtonMethods : MonoBehaviour
     public void cheat(){
         GameObject gameControllerObj = GameObject.Find("GameController");
         Controller controller = gameControllerObj.GetComponent<Controller>();
-        Player p = controller.currentPlayer;
+        Player p = controller.players[1];
+        p.resources[ResourceType.Brick]+=10;
+        p.resources[ResourceType.Lumber]+=10;
+        p.resources[ResourceType.Grain]+=10;
+        p.resources[ResourceType.Ore]+=10;
+        p.resources[ResourceType.Wool]+=10;
+        p = controller.players[0];
         p.resources[ResourceType.Brick]+=10;
         p.resources[ResourceType.Lumber]+=10;
         p.resources[ResourceType.Grain]+=10;
