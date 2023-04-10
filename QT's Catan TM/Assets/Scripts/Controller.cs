@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Controller : MonoBehaviour
 {
@@ -170,6 +171,7 @@ public class Controller : MonoBehaviour
             if(currentPlayer.cpu){
                 Invoke("aiMoveRobber", 1.0f);
             }
+            takeHalf();
             return;
         }
      
@@ -186,6 +188,27 @@ public class Controller : MonoBehaviour
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    public void takeHalf(){
+        List<Player> toTake = new List<Player>();
+        foreach(Player player in players){
+            List<int> valuesList = player.resources.Values.ToList();
+            if(valuesList.Sum() > 7){
+                toTake.Add(player);
+            }
+        }
+        List<ResourceType> types = new List<ResourceType>(players[0].resources.Keys); 
+        foreach(Player p in toTake){
+            int total = p.resources.Values.ToList().Sum();
+            int halfResourceCount = Mathf.FloorToInt(total / 2);
+            while(p.resources.Values.ToList().Sum() > halfResourceCount){
+                ResourceType randomResource = types[UnityEngine.Random.Range(0,5)];
+                if(p.resources[randomResource] > 0){
+                    p.resources[randomResource]--;
                 }
             }
         }

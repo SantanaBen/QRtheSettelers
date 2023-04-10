@@ -2428,7 +2428,7 @@ GameObject:
   - component: {fileID: 1884801819}
   - component: {fileID: 1884801821}
   m_Layer: 0
-  m_Name: ClickAudio
+  m_Name: Click
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
